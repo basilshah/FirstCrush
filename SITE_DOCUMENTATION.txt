@@ -1,0 +1,126 @@
+First Crush – Website Documentation
+
+1) Sections (in page order)
+- Header (sticky top navigation)
+- Hero (full-height intro)
+- Products (product grid)
+- Cart Drawer (slide-in cart overlay)
+- Footer (contact/social + copyright)
+
+2) Content of Each Section
+- Header
+  - Brand: "First Crush" with leaf icon (links to #top)
+  - Navigation links (desktop):
+    - "Products" → #products
+    - "Contact" → #contact
+
+- Hero
+  - Badge/Icon: Leaf icon in a green circular badge
+  - Heading: "First Crush"
+  - Subheading: "Homemade, natural crushed powders — no artificial colors or flavors, no preservatives."
+  - Primary Button: "Shop Now" (scrolls to first product or #products)
+  - Secondary Button: "Contact" (links to #contact)
+
+- Products (id="products")
+  - Section heading: "Shop our crushed powders"
+  - Section description: "Homemade, small-batch and natural — no artificial colors or flavors, no preservatives."
+  - Product cards (from mock data):
+    - p1: "Organic Ashwagandha Capsules" – "Adaptogenic support for stress and energy." – ₹499
+    - p2: "Cold-Pressed Coconut Oil" – "Pure, natural oil for cooking and skin." – ₹349
+    - p3: "Multivitamin Gummies" – "Daily vitamins with a tasty chew." – ₹399
+    - p4: "Herbal Green Tea Mix" – "Detoxifying blend with natural herbs." – ₹299
+    - p5: "Chia Seeds Premium" – "High-fiber superfood for smoothies." – ₹199
+    - p6: "Apple Cider Vinegar" – "Unfiltered, with the mother." – ₹259
+  - Each product card includes:
+    - Image (Unsplash URL)
+    - Name
+    - Description (clamped to 2 lines)
+    - Price (₹)
+    - "Add to Cart" button
+
+- Cart Drawer (slide-in panel)
+  - Header: "Your Cart" with item count and close button
+  - Empty state: "Your cart is empty" + helper copy
+  - List of cart items (image, name, quantity controls, line total)
+  - Footer: Total amount, "Clear" button, and "Checkout via WhatsApp" link
+
+- Footer (id="contact")
+  - Social links: "Instagram", "WhatsApp" (placeholder href="#")
+  - Copyright: "© <current year> First Crush. All rights reserved."
+
+3) Features and Interactions
+- Global
+  - Toast notifications: "Added to cart" on add (react-hot-toast; toaster at bottom-center)
+  - Smooth scroll behavior when supported (via JS and CSS)
+
+- Header
+  - Sticky header with blur and translucent background on scroll
+  - Desktop-only nav menu (hidden on small screens)
+
+- Hero
+  - Framer Motion animations: fade-in/up for heading
+  - Decorative blurred green circle background
+  - "Shop Now" button scrolls to element with id="first-product"; falls back to #products
+
+- Products
+  - Grid uses Framer Motion: staggered fade/slide-in for cards when in view
+  - Responsive grid: 1 col (mobile), 2 (md), 3 (lg), 4 (xl)
+  - Product card hover: lift (-4px) and image scales up slightly
+
+- Cart
+  - Floating cart button (bottom-right) shows item count; opens cart drawer
+  - Cart drawer uses Framer Motion + AnimatePresence for slide-in/out and backdrop fade
+  - Quantity controls (+/−), remove item, clear cart
+  - Total computed from cart context
+  - "Checkout via WhatsApp" builds a message: items x qty with line totals and overall total (placeholder number: 91XXXXXXXXXX)
+
+4) Design Details
+- Colors (Tailwind + custom theme)
+  - Primary greens (e.g., bg-green-600, hover:bg-green-700)
+  - Tailwind extended palette `primary` (50–900), `beige` #faf6f1
+  - Neutral grays from Tailwind (`text-gray-900`, `text-gray-600`, borders)
+  - Gradients: Hero uses from-green-50 → white → beige (#faf6f1)
+
+- Typography
+  - Font family: "Poppins", falling back to common system sans fonts (configured in Tailwind theme)
+  - Heading sizes: Hero title ~text-5xl/6xl; section titles ~text-2xl
+  - Body text primarily gray-600; strong text gray-900
+
+- Layout
+  - Content constrained to `max-w-7xl` with horizontal padding (px-5/6)
+  - Hero section is full viewport height on mobile (`min-h-[100svh]`), comfortable padding on larger screens
+  - Rounded corners: cards and buttons use `rounded-xl` / `rounded-2xl`
+  - Shadows: soft shadows for elevation; hover adds depth
+
+- Iconography
+  - `lucide-react` icons: Leaf (branding), ShoppingBag, X, Plus, Minus, Trash2
+
+- Motion
+  - Framer Motion for hero title, product grid stagger, cart drawer transitions
+
+5) Navigation and Links
+- Header navigation
+  - Brand logo: `#top`
+  - "Products": `#products`
+  - "Contact": `#contact`
+
+- In-hero CTAs
+  - "Shop Now": Scroll to `#first-product` (first product card) or `#products`
+  - "Contact": Anchor to `#contact`
+
+- Cart and Checkout
+  - Floating Cart button opens drawer
+  - WhatsApp checkout link: `https://wa.me/91XXXXXXXXXX?text=<encoded order summary>`
+
+6) Notes and Integrations
+- Data source currently uses mock products (`src/data/mockProducts.ts`). A comment outlines how to switch to SheetDB via fetch and map rows to `Product` type.
+- Currency and locale: Prices shown as ₹; cart totals formatted using Intl.NumberFormat with en-IN.
+- Accessibility: Buttons include aria-labels for cart controls; images include alt text from product names.
+
+7) Suggested Content Replacements (when going live)
+- Replace WhatsApp number `91XXXXXXXXXX` with the business number
+- Update social links in footer to real profiles
+- Replace mock product images/entries with production data/source
+- Consider adding mobile nav toggle if needed (current menu hidden on small screens)
+
+End of document.
