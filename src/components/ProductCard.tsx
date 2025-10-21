@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { ShoppingBag, Star, Leaf } from "lucide-react";
 import type { Product } from "../types/product";
 
@@ -9,8 +9,8 @@ interface Props {
 
 export default function ProductCard({ product, onAdd }: Props) {
   return (
-    <motion.div
-      whileHover={{ y: -4 }}
+    <div
+      // whileHover={{ y: -4 }}
       className="group relative flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md touch-manipulation"
     >
       {/* Badges */}
@@ -92,6 +92,6 @@ export default function ProductCard({ product, onAdd }: Props) {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
