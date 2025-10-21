@@ -82,20 +82,22 @@ export default function FAQ() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="rounded-2xl bg-green-600 px-8 py-12 text-white">
-            <h3 className="text-2xl font-semibold">Still have questions?</h3>
-            <p className="mt-4 text-lg opacity-90">
+          <div className="rounded-2xl bg-green-600 px-4 py-8 text-white sm:px-8 sm:py-12">
+            <h3 className="text-xl font-semibold sm:text-2xl">
+              Still have questions?
+            </h3>
+            <p className="mt-3 text-base opacity-90 sm:mt-4 sm:text-lg">
               Our team is here to help! Reach out to us on WhatsApp or Instagram
               for personalized assistance.
             </p>
-            <div className="mt-6 flex flex-row gap-4 justify-center items-center">
+            <div className="mt-4 flex flex-col gap-3 justify-center items-center sm:mt-6 sm:flex-row sm:gap-4">
               <a
                 href={whatsappUrl}
                 target="_blank"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-green-600 font-semibold transition hover:bg-gray-100 hover:scale-105"
+                className="w-full max-w-xs inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-green-600 font-semibold transition hover:bg-gray-100 hover:scale-105 sm:w-auto sm:px-6 sm:py-3"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-4 w-4 sm:h-5 sm:w-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -106,10 +108,10 @@ export default function FAQ() {
               <a
                 href={instagramUrl}
                 target="_blank"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-pink-600 font-semibold transition hover:bg-gray-100 hover:scale-105"
+                className="w-full max-w-xs inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-pink-600 font-semibold transition hover:bg-gray-100 hover:scale-105 sm:w-auto sm:px-6 sm:py-3"
               >
                 <svg
-                  className="h-5 w-5"
+                  className="h-4 w-4 sm:h-5 sm:w-5"
                   fill="url(#instagram-gradient-faq)"
                   viewBox="0 0 24 24"
                 >

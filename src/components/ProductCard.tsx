@@ -11,7 +11,7 @@ export default function ProductCard({ product, onAdd }: Props) {
   return (
     <motion.div
       whileHover={{ y: -4 }}
-      className="group relative flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+      className="group relative flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md touch-manipulation"
     >
       {/* Badges */}
       <div className="absolute top-3 left-3 z-10 flex gap-2">
@@ -27,11 +27,17 @@ export default function ProductCard({ product, onAdd }: Props) {
         )}
       </div>
 
-      <div className="aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
+      <div className="aspect-square w-full overflow-hidden rounded-xl bg-gray-100 relative">
         <img
           src={product.image}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src =
+              "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgMTAwTDEyMCA4MEwxNDAgMTAwTDEyMCAxMjBMMTAwIDEwMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+";
+          }}
         />
       </div>
 
@@ -78,7 +84,8 @@ export default function ProductCard({ product, onAdd }: Props) {
           </div>
           <button
             onClick={() => onAdd(product)}
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-green-600 px-4 py-2 text-white shadow-sm transition active:scale-[0.98] hover:-translate-y-0.5 hover:bg-green-700"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-green-600 px-4 py-2 text-white shadow-sm transition active:scale-[0.98] hover:-translate-y-0.5 hover:bg-green-700 touch-manipulation select-none"
+            type="button"
           >
             <ShoppingBag className="h-4 w-4" />
             Add

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Leaf, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -19,6 +20,26 @@ export default function Header() {
     }
     closeMobileMenu();
   };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        closeMobileMenu();
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/90 border-b border-white/60 shadow-sm">
@@ -72,7 +93,10 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+        <div
+          ref={mobileMenuRef}
+          className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg"
+        >
           <nav className="px-4 py-4 space-y-3">
             <button
               onClick={() => scrollToSection("about")}
@@ -104,14 +128,6 @@ export default function Header() {
             >
               Contact
             </button>
-            <div className="pt-3 border-t border-gray-200">
-              <button
-                onClick={() => scrollToSection("products")}
-                className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
-              >
-                Shop Now
-              </button>
-            </div>
           </nav>
         </div>
       )}
